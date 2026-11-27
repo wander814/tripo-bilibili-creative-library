@@ -15,6 +15,8 @@ for p in catalog['periods']:
     for m in p['materials']:
         assert set(m)<=ALLOWED
         assert m['format'] in ('image','video') and m['platform'] in ('web','app')
+        assert re.fullmatch(r'[IV]-(WEB|APP)-[A-F0-9]{10}',m['id'])
+        assert m['title']==('Web' if m['platform']=='web' else 'App')+' '+('图片' if m['format']=='image' else '视频')+' · '+m['id'].split('-')[-1][:6], 'Public titles must remain neutral material identifiers'
         assert isinstance(m.get('agencies'),list) and m['agencies']
         assert all(isinstance(label,str) and (re.fullmatch(r'代理商[1-9][0-9]*',label) or label in ('自供','来源待确认')) for label in m['agencies']), 'Public agency labels must be anonymous aliases'
         for key in ('src','poster'):
