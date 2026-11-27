@@ -1,0 +1,6 @@
+.DS_Store
+*.sqlite*
+.env*
+private/
+source-cache/
+private-provenance.json
