@@ -26,7 +26,7 @@ for p in catalog['periods']:
                 sources.add(m[key])
 for name in ('index.html','internal.html','catalog.json'):
     raw=(ROOT/name).read_text()
-    for forbidden in ('spend_cents','creative_names','source_rows','scale_reason','paid_share','/spark/','feishuapp.com/app/','166,609.96','39,308.65'):
+    for forbidden in ('spend_cents','creative_names','source_rows','private-ordering','consumption_cents','scale_reason','paid_share','/spark/','feishuapp.com/app/','166,609.96','39,308.65'):
         assert forbidden not in raw, (name,forbidden)
 inline=re.search(r'<script id="catalog-data" type="application/json">(.*?)</script>',(ROOT/'index.html').read_text(),re.S)
 assert inline and json.loads(inline.group(1))==catalog, 'HTML catalog differs from the verified public catalog'
